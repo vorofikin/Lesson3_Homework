@@ -10,5 +10,5 @@ split(BinText, Delimiter, Acc, CurrentPart) ->
   case BinText of
     <<BinDelim:DelimSize/binary, Rest/binary>> -> split(Rest, Delimiter, [CurrentPart | Acc], <<>>);
     <<Char, Rest/binary>> -> split(Rest, Delimiter, Acc, <<CurrentPart/binary, Char/utf8>>);
-    <<>> -> lists:reverse(Acc)
+    <<>> -> lists:reverse([CurrentPart | Acc])
   end.
