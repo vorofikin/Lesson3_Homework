@@ -84,7 +84,7 @@ tokenize_list(<<?SINGLE_QUOTE, Rest/binary>>, List, Flag) ->
 tokenize_list(<<?COMMA, Rest/binary>>, List, Flag) ->
   tokenize_list(Rest, List, Flag);
 tokenize_list(<<?CLOSE_SQUARE_BRACKET, Rest/binary>>, List, _) ->
-  {List, Rest};
+  {lists:reverse(List), Rest};
 tokenize_list(<<Char, Rest/binary>>, List, Flag) when ?IS_SPACE(Char) ->
   tokenize_list(Rest, List, Flag).
 
