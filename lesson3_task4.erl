@@ -19,10 +19,12 @@
 ).
 -define(EMPTY, "").
 
-decode(Json, map) ->
-  decode_map(Json, maps:new());
-decode(Json, proplist) ->
-  decode_proplist(Json, []).
+decode(Json, Format) ->
+  case Format of
+    proplist -> decode_proplist(Json, []);
+    map -> decode_map(Json, maps:new());
+    _ -> undefined
+  end.
 
 decode_proplist(<<?COMMA, Rest/binary>>, PropList) ->
   {Key, Value, Rest1} = tokenize(Rest, <<>>, <<>>, proplist),
